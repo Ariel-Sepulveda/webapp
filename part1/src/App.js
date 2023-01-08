@@ -18,6 +18,8 @@ const App = () => {
     setBad(bad + 1)
   }
 
+  const totalVotes = () => (good + bad + neutral)
+
   return (
     <div>
       <h1>give feedback</h1>
@@ -28,9 +30,12 @@ const App = () => {
 
       <h1>statistics</h1>
 
-      <Display text={'good ' + good} />
-      <Display text={'neutral ' + neutral} />
-      <Display text={'bad ' + bad} />
+      <Display text="good" votes={good} />
+      <Display text="neutral" votes={neutral} />
+      <Display text="bad" votes={bad} />
+      <Display text="all" votes={totalVotes()} />
+      <Display text="average" votes={totalVotes/3} />
+      <Display text="positive" votes={(good/(good + bad + neutral)) * 100} />
       
     </div>
   )
@@ -42,10 +47,10 @@ const Button = ({ handler, text }) => {
   )
 }
 
-const Display = ({ text }) => {
+const Display = ({ text, votes }) => {
   return (
     <div>
-      {text}
+      {text + ' ' + votes}
     </div>
   )
 }
