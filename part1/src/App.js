@@ -28,10 +28,10 @@ const Button = ({ handler, text }) => {
   )
 }
 
-const Display = ({ text, votes }) => {
+const StatisticLine  = ({ text, value }) => {
   return (
     <div>
-      {text + ' ' + votes}
+      {text + ' ' + value}
     </div>
   )
 }
@@ -48,12 +48,12 @@ const Statistics = ({ good, neutral, bad }) => {
 
   return (
     <>
-      <Display text="good" votes={good} />
-      <Display text="neutral" votes={neutral} />
-      <Display text="bad" votes={bad} />
-      <Display text="all" votes={totalVotes()} />
-      <Display text="average" votes={totalVotes() / 3} />
-      <Display text="positive" votes={(good / (good + bad + neutral)) * 100} />
+      <StatisticLine  text="good" value={good} />
+      <StatisticLine  text="neutral" value={neutral} />
+      <StatisticLine  text="bad" value={bad} />
+      <StatisticLine  text="all" value={totalVotes()} />
+      <StatisticLine  text="average" value={totalVotes() / 3} />
+      <StatisticLine  text="positive" value={(good / totalVotes()) * 100} />
     </>
   )
 }
