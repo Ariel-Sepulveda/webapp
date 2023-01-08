@@ -1,56 +1,52 @@
+import { useState } from 'react'
+
 const App = () => {
-  const course = {
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7
-      },
-      {
-        name: 'State of a component',
-        exercises: 14
-      }
-    ]
+  // save clicks of each button to its own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+  const goodClick = () => {
+    setGood(good + 1)
   }
+
+  const neutralClick = () => {
+    setNeutral(neutral + 1)
+  }
+
+  const badClick = () => {
+    setBad(bad + 1)
+  }
+
   return (
     <div>
-      <Header course={course.name} />
-      <Content parts={course.parts} />
-      <Total parts={course.parts} />
+      <h1>give feedback</h1>
+
+      <Button handler={goodClick} text="good" />
+      <Button handler={neutralClick} text="neutral" />
+      <Button handler={badClick} text="bad" />
+
+      <h1>statistics</h1>
+
+      <Display text={'good ' + good} />
+      <Display text={'neutral ' + neutral} />
+      <Display text={'bad ' + bad} />
+      
     </div>
   )
 }
 
-const Header = (props) => {
+const Button = ({ handler, text }) => {
   return (
-    <h1>{props.course}</h1>
+    <button onClick={handler}>{text}</button>
   )
 }
 
-const Content = (props) => {
+const Display = ({ text }) => {
   return (
     <div>
-      {props.parts.map((p, index) => <Part key={index} name={p.name} exercises={p.exercises} />)}
+      {text}
     </div>
-  )
-}
-
-const Part = (props) => {
-  return (
-    <p>
-      {props.name} {props.exercises}
-    </p>
-  )
-}
-
-const Total = (props) => {
-  const total = props.parts.reduce((prevValue, currentValue) => prevValue + currentValue.exercises, 0)
-  return (
-    <p>Number of exercises {total}</p>
   )
 }
 
