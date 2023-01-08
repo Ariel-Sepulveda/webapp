@@ -22,17 +22,15 @@ const App = () => {
   )
 }
 
-const Button = ({ handler, text }) => {
-  return (
-    <button onClick={handler}>{text}</button>
-  )
-}
+const Button = ({ handler, text }) => <button onClick={handler}>{text}</button>
 
-const StatisticLine  = ({ text, value }) => {
+
+const StatisticLine = ({ text, value }) => {
   return (
-    <div>
-      {text + ' ' + value}
-    </div>
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
   )
 }
 
@@ -47,14 +45,16 @@ const Statistics = ({ good, neutral, bad }) => {
   }
 
   return (
-    <>
-      <StatisticLine  text="good" value={good} />
-      <StatisticLine  text="neutral" value={neutral} />
-      <StatisticLine  text="bad" value={bad} />
-      <StatisticLine  text="all" value={totalVotes()} />
-      <StatisticLine  text="average" value={totalVotes() / 3} />
-      <StatisticLine  text="positive" value={(good / totalVotes()) * 100} />
-    </>
+    <table>
+      <tbody>
+        <StatisticLine text="good" value={good} />
+        <StatisticLine text="neutral" value={neutral} />
+        <StatisticLine text="bad" value={bad} />
+        <StatisticLine text="all" value={totalVotes()} />
+        <StatisticLine text="average" value={(totalVotes() / 3).toFixed(1)} />
+        <StatisticLine text="positive" value={((good / totalVotes()) * 100).toFixed(2) + ' %'} />
+      </tbody>
+    </table>
   )
 }
 
