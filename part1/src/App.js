@@ -40,8 +40,14 @@ const Statistics = ({ good, neutral, bad }) => {
 
   const totalVotes = () => (good + bad + neutral)
 
+  if (totalVotes() === 0) {
+    return (
+      <div>no feedback given</div>
+    )
+  }
+
   return (
-    <>  
+    <>
       <Display text="good" votes={good} />
       <Display text="neutral" votes={neutral} />
       <Display text="bad" votes={bad} />
